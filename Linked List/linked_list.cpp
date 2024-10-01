@@ -73,6 +73,25 @@ class LinkedList {
             head = front_node;
         }
 
+        // void InsertIndex(Node *, int value) {
+
+        // }
+
+        void InserBefore(int value, int key) {
+            Node *temp = head;
+            if (temp == NULL) {
+                cout << "Linked List is empty";
+            }
+            else {            
+                while (temp->next_node != NULL) {
+                    if (temp->data == key) {
+                        temp = new Node(value);
+                        break;
+                    }
+                    temp = temp->next_node;
+                }
+            } 
+        }
         
 };
 
