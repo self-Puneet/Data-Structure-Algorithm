@@ -27,6 +27,19 @@ class LinkedList {
             head = NULL; 
         }
 
+        void display_linked_list() {
+            Node *temp = head;
+            do {
+                if (temp->next_node != NULL) {
+                    cout << temp->data << " -> ";
+                }
+                else {
+                    cout << temp->data << endl;
+                }
+                temp = temp->next_node;
+            } while (temp != NULL);
+        }
+
         int count() {
             int count = 0;
             Node *temp = head;
@@ -73,26 +86,46 @@ class LinkedList {
             head = front_node;
         }
 
-        // void InsertIndex(Node *, int value) {
-
-        // }
-
-        void InserBefore(int value, int key) {
+        void InsertAfter(int value, int key) {
             Node *temp = head;
+            bool flag = false;
             if (temp == NULL) {
                 cout << "Linked List is empty";
             }
-            else {            
-                while (temp->next_node != NULL) {
+            else {
+                do {
                     if (temp->data == key) {
-                        temp = new Node(value);
-                        break;
+                        Node *new_node = new Node(value);
+                        new_node->next_node = temp->next_node;
+                        temp->next_node = new_node;
+                        return;
                     }
                     temp = temp->next_node;
-                }
-            } 
+                } while (temp->next_node != NULL);
+                cout << value << " is not a valid value in linked list." << endl;
+            }
         }
-        
+
+        void InsertBefore(int value, int key) {
+            Node *temp = head;
+            bool flag = false;
+            if (temp == NULL) {
+                cout << "Linked List is empty";
+            }
+            else {
+                
+                do {
+                    if (temp->data == key) {
+                        Node *new_node = new Node(value);
+                        new_node->next_node = temp->next_node;
+                        temp->next_node = new_node;
+                        return;
+                    }
+                    temp = temp->next_node;
+                } while (temp->next_node != NULL);
+                cout << value << " is not a valid value in linked list." << endl;
+            }
+        }    
 };
 
 int main() {
@@ -100,10 +133,11 @@ int main() {
     obj1.InsertRear(23);
     obj1.InsertRear(24);
     obj1.InsertRear(25);
-    obj1.InsertFront(1);
+    obj1.InsertRear(27);    
+    obj1.InsertAfter(26, 25);
     cout << "Total number of nodes : " << obj1.count() << endl;
     cout << "Value of Last Element : " << obj1.rear() << endl;
     cout << "Value of Front Element : " << obj1.front() << endl;
-
+    obj1.display_linked_list();
     return 0;
 }
