@@ -144,7 +144,33 @@ class LinkedList {
             cout << value << " is not a valid value in linked list." << endl;
         }
 
-        
+        // Deletion
+        void DeleteRear() {
+            if (head == NULL) {
+                cout << "This operation is not supported with a empty linked list" << endl;
+            }
+            else {
+                Node *temp = head;
+                if (temp->next_node == NULL){
+                    head = NULL;
+                }
+                else {
+                    while (temp->next_node->next_node != NULL){
+                        temp = temp->next_node;
+                    }
+                    temp->next_node = NULL;
+                }
+            }
+        }
+
+        void DeleteFront() {
+            Node *temp = head;
+            head = temp->next_node;
+        }
+
+        void DeleteAfter(int key) {}
+        void DeleteBefore(int key) {}
+        void DeleteAt(int key) {}
 
 };
 
@@ -159,6 +185,8 @@ int main() {
     cout << "Total number of nodes : " << obj1.count() << endl;
     cout << "Value of Last Element : " << obj1.rear() << endl;
     cout << "Value of Front Element : " << obj1.front() << endl;
+    obj1.display_linked_list();
+    obj1.DeleteRear();
     obj1.display_linked_list();
     return 0;
 }
