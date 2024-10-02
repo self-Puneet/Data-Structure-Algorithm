@@ -65,6 +65,8 @@ class LinkedList {
             return head->data;
         }
 
+
+        // Insertion
         void InsertRear(int d) {
             if (head == NULL) {    
                 head = new Node(d);
@@ -108,24 +110,42 @@ class LinkedList {
 
         void InsertBefore(int value, int key) {
             Node *temp = head;
+            int var = temp->next_node->data;
+            
             bool flag = false;
             if (temp == NULL) {
                 cout << "Linked List is empty";
             }
             else {
-                
+                               
                 do {
-                    if (temp->data == key) {
-                        Node *new_node = new Node(value);
+                    if (var == key) {
+                        Node *new_node = new Node (value);
                         new_node->next_node = temp->next_node;
                         temp->next_node = new_node;
                         return;
-                    }
+                    } 
                     temp = temp->next_node;
+                    var = temp->next_node->data;
                 } while (temp->next_node != NULL);
                 cout << value << " is not a valid value in linked list." << endl;
             }
         }    
+
+        void InsertAt(int value, int key) {
+            Node *temp = head;
+            do{
+                if (temp->data == key) {
+                    temp->data = value;
+                    return;
+                }
+                temp = temp->next_node;
+            } while (temp->next_node == NULL);
+            cout << value << " is not a valid value in linked list." << endl;
+        }
+
+        
+
 };
 
 int main() {
@@ -135,6 +155,7 @@ int main() {
     obj1.InsertRear(25);
     obj1.InsertRear(27);    
     obj1.InsertAfter(26, 25);
+    obj1.InsertBefore(26, 25);    
     cout << "Total number of nodes : " << obj1.count() << endl;
     cout << "Value of Last Element : " << obj1.rear() << endl;
     cout << "Value of Front Element : " << obj1.front() << endl;
