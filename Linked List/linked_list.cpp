@@ -83,7 +83,7 @@ class LinkedList {
         }
 
         void InsertFront(int d) {
-            Node *front_node = new Node(1);
+            Node *front_node = new Node(d);
             front_node->next_node = head;
             head = front_node;
         }
@@ -134,13 +134,13 @@ class LinkedList {
 
         void InsertAt(int value, int key) {
             Node *temp = head;
-            do{
+            while (temp->next_node != NULL) {
                 if (temp->data == key) {
                     temp->data = value;
                     return;
                 }
                 temp = temp->next_node;
-            } while (temp->next_node == NULL);
+            }
             cout << value << " is not a valid value in linked list." << endl;
         }
 
@@ -168,25 +168,121 @@ class LinkedList {
             head = temp->next_node;
         }
 
-        void DeleteAfter(int key) {}
-        void DeleteBefore(int key) {}
-        void DeleteAt(int key) {}
+        void DeleteAfter(int key) {
+            if (head == NULL) {
+                cout << "This operation is not supported with a empty linked list" << endl;
+            }
+            else {
+                Node *temp = head;
+                while (temp != NULL) {
+                    if (temp->data == key) {
+                        temp->next_node = temp->next_node->next_node;
+                        return;
+                    }
+                    temp = temp->next_node;
+                }
+                cout << key << "is not found in the Linked List." << endl;
+            }            
+        }
 
+        void DeleteBefore(int key) {
+            if (head == NULL) {
+                cout << "This operation is not supported with a empty linked list" << endl;
+            }
+            else {
+                Node *temp = head;
+                while (temp != NULL) {
+                    if (key == temp->next_node->next_node->data) {
+                        temp->next_node = temp->next_node->next_node;
+                        return;
+                    }
+                    temp = temp->next_node;
+                }
+                cout << "There is no element in Linked List with value" << key << endl;
+            }
+        }
+        
+        void DeleteAt(int key) {
+            if (head == NULL) {
+                cout << "This operation is not supported with a empty linked list" << endl;
+            }
+            else {
+                Node * temp = head;
+                while (temp != NULL) {
+                    if (key == temp->next_node->data) {
+                        temp->next_node = temp->next_node->next_node;
+                        return;
+                    }
+                    temp = temp->next_node;
+                }
+                cout << "There is no element in Linked List with value" << key << endl;
+            }
+        }
+
+        // Searching
+        int Search(int key) {
+            int count = 0;
+            Node *temp = head;
+            while (temp->next_node != NULL) {
+                if (temp->data == key) {
+                    return count;
+                }
+                count ++;
+                temp = temp->next_node;
+            }
+            return -1;
+        }
 };
 
 int main() {
     LinkedList obj1;
+    obj1.InsertRear(22);
     obj1.InsertRear(23);
-    obj1.InsertRear(24);
     obj1.InsertRear(25);
-    obj1.InsertRear(27);    
+    obj1.InsertRear(27);
+
+
+    cout << "Current Array : \t";
+    obj1.display_linked_list();
+
     obj1.InsertAfter(26, 25);
-    obj1.InsertBefore(26, 25);    
-    cout << "Total number of nodes : " << obj1.count() << endl;
-    cout << "Value of Last Element : " << obj1.rear() << endl;
-    cout << "Value of Front Element : " << obj1.front() << endl;
+    cout << "Insert 26 after 25 : \t";
     obj1.display_linked_list();
+
+    obj1.InsertBefore(24, 25);
+    cout << "Insert 24 before 25 : \t";
+    obj1.display_linked_list();
+
+    obj1.InsertAt(-25, 25);
+    cout << "Insert -25 in place of 25 : \t";
+    obj1.display_linked_list();
+    
+    obj1.InsertFront(-22);
+    cout << "Insert -22 in front : \t";
+    obj1.display_linked_list();
+
     obj1.DeleteRear();
+    cout << "Delte Rear most element : \t";
     obj1.display_linked_list();
+
+    obj1.DeleteAfter(25);
+    cout << "Delete element after 25 : \t";
+    obj1.display_linked_list();
+    
+    obj1.DeleteBefore(25);
+    cout << "Delete element before 25 : \t";
+    obj1.display_linked_list();
+
+    obj1.DeleteAt(25);
+    cout << "Delete element with value 25 : \t";
+    obj1.display_linked_list();
+
+    obj1.DeleteFront();
+    cout << "Delete Front Element : \t";
+    obj1.display_linked_list();
+
+    cout << "Search 23 element : \t";
+    cout  << obj1.Search(23);
+
     return 0;
 }
