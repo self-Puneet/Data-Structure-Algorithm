@@ -10,6 +10,10 @@ class Node {
             data = value;
             next_node = NULL;
         }
+        Node (int value, Node *head) {
+            data = value;
+            next_node = head;
+        }
 };
 
 class LinkedList {
@@ -27,7 +31,7 @@ class LinkedList {
             head = NULL; 
         }
 
-        void display_linked_list() {
+        virtual void display_linked_list() {
             Node *temp = head;
             do {
                 if (temp->next_node != NULL) {
@@ -67,7 +71,7 @@ class LinkedList {
 
 
         // Insertion
-        void InsertRear(int d) {
+        virtual void InsertRear(int d) {
             if (head == NULL) {    
                 head = new Node(d);
                 cout << "head node with value " << d << " is made" << endl;
@@ -82,7 +86,7 @@ class LinkedList {
             }
         }
 
-        void InsertFront(int d) {
+        virtual void InsertFront(int d) {
             Node *front_node = new Node(d);
             front_node->next_node = head;
             head = front_node;
@@ -145,7 +149,7 @@ class LinkedList {
         }
 
         // Deletion
-        void DeleteRear() {
+        virtual void DeleteRear() {
             if (head == NULL) {
                 cout << "This operation is not supported with a empty linked list" << endl;
             }
@@ -163,7 +167,7 @@ class LinkedList {
             }
         }
 
-        void DeleteFront() {
+        virtual void DeleteFront() {
             Node *temp = head;
             head = temp->next_node;
         }
