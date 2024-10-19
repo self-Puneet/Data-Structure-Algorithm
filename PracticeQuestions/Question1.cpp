@@ -20,55 +20,72 @@ class ShoppingList {
             }
             else if (rear < 49) {
                 rear ++;
-                arr[rear] = itemName;
+                array[rear] = itemName;
                 cout << itemName << " item is added to our database ..." << endl;
             }
             else {
                 fullInventory();
             }
         }
-
         void removeItems (string itemName) {
-            int indexRemove = search(itemName);
-            int size = sizeof(this.array) / sizeof(this->array);
-            if (indexRemove == -1) {
-                cout << "Sorry we can't find this element in our database !! Try again with another one ..." << endl;
+            if (front == -1) {
+                emptyInventory();
             }
             else {
-                for (int i = indexRemove; i < rear; i ++) {
-                    this.array[i] = this.array[i + 1];
+                int indexRemove = search(itemName);
+                int size = sizeof(array) / sizeof(this->array);
+                if (indexRemove == -1) {
+                    cout << "Sorry we can't find this element in our database !! Try again with another one ..." << endl;
                 }
-                rear --;
-                cout << itemName << " item is removed from our database." << endl;
+                else {
+                    for (int i = indexRemove; i < rear; i ++) {
+                        array[i] = array[i + 1];
+                    }
+                    rear --;
+                    cout << itemName << " item is removed from our database." << endl;
+                }
             }
-            
+        }
+        void display () {
+            if (rear == -1) {
+                emptyInventory();
+            }
+            else {
+                for (int i = 0; i <= rear; i ++) {
+                    if (i == rear) {
+                        cout << array[i] << endl;
+                    }
+                    else {
+                        cout << array[i] << ", ";
+                    }
+                }
+            }
         }
 
         int search (string itemName) {
 
-            int size = sizeof(this.array) / sizeof(this->array);
+            int size = sizeof(array) / sizeof(this->array);
 
             for (int i = 0; i < rear; i++) {
-                if (itemName == this.array[i]) {
+                if (itemName == array[i]) {
                     return i;
                 }
             }
             return -1;
         }
-
         void fullInventory() {
             cout << "Sorry there is no space left for more items. TRY removing some of them..." << endl;
         }
-
-        void display () {
-            for (int i = 0; i <= rear; i ++) {
-                if (i == rear) {
-                    cout << this.array[i] << endl;
-                }
-                else {
-                    cout << this.array[i] << ", ";
-                }
-            }
+        void emptyInventory() {
+            cout << "sorry our inventory is empty.." << endl;
         }
-
 };
+
+int main() {
+    ShoppingList obj;
+    obj.addItems("toothbrush");
+    obj.addItems("toothpaste");
+    obj.removeItems("toothbrush");
+    obj.display();
+    return 0;
+}
