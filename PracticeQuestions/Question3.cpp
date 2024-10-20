@@ -27,18 +27,18 @@ class GradesStorage {
         GradesStorage (string names[], double grades[]) {
             for (int i = 0; i < 20; i++) {
                 rear++;
-                students[rear] = Book(names[i], grades[i]);
+                students[rear] = StudentRecord(grades[i], names[i]);
             }
         }
         void newEntry (string name_, double grade_) {
             if (front == -1) {
                 front++;
                 rear++;
-                students[rear] = StudentRecord(name_, grade_);
+                students[rear] = StudentRecord( grade_, name_);
             }
             else if (rear < 29){
                 rear++;
-                students[rear] = StudentRecord(name_, grade_);
+                students[rear] = StudentRecord(grade_, name_);
             }
             else {
                 limitExceed ();
@@ -53,8 +53,8 @@ class GradesStorage {
                 for (int i = 0; i < rear; i++) {
                     average_ += students[i].grade;
                 }
-                average_ = sum/30;
-                cout << "average of class = " << grade << endl;
+                average_ = average_/30;
+                cout << "average of class = " << average_ << endl;
             }
         }
         void limitExceed () {
@@ -67,7 +67,7 @@ class GradesStorage {
             else {
                 int highest_index = 0;
                 for (int i = 0; i < 30; i++) {
-                    if (students[highest_index] < students[i]) {
+                    if (students[highest_index].grade < students[i].grade) {
                         highest_index = i;
                     }
                 }
@@ -81,7 +81,7 @@ class GradesStorage {
             else {
                 int lowest_index = 0;
                 for (int i = 0; i < 30; i++) {
-                    if (students[lowest_index] < students[i]) {
+                    if (students[lowest_index].grade < students[i].grade) {
                         lowest_index = i;
                     }
                 }
@@ -91,7 +91,7 @@ class GradesStorage {
 };
 
 int main() {
-    string names[] = {
+    string names[30] = {
         "Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", 
         "Helen", "Ivan", "Judy", "Karl", "Laura", "Mike", "Nina", 
         "Oscar", "Paul", "Quinn", "Rachel", "Steve", "Tina", 
