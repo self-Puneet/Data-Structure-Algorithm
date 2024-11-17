@@ -30,7 +30,6 @@ class ParenthesisChecker {
                         return true;
                     }
                 }
-                
             }
             return false;
         }

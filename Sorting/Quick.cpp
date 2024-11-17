@@ -40,8 +40,8 @@ class QuickSort {
 
                 arr[j] = temp;
             
-                sort(arr, initial, j - 1);
-                sort(arr, j + 1, final); 
+                _sort_(arr, initial, j - 1);
+                _sort_(arr, j + 1, final); 
             }
         }
     public :
@@ -62,8 +62,10 @@ class QuickSort {
 };
 
 int main() {
-    int arr[6] = {1, 23, -34, 45, -5, -12};
+    // int arr[6] = {1, 23, -34, 45, -5, -12};
+    int arr[6] = {4,7,2,3,0,-1};
+
     QuickSort<int>::sort(arr, 6);
-    QuickSort<int>::print(arr, 6);
+    QuickSort<int>::print(arr, 0 , 6);
     return 0;
 }
