@@ -3,7 +3,8 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "typeinfo": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "array": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

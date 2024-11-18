@@ -3,56 +3,85 @@
 
 #include <iostream>
 using namespace std;
-template <typename T>
 
-class Queue {
-    public:
-        T* array;
-        int size = 0;
-        int front = -1, rear = -1;
-        Queue(int n) {
-            array = new T[n];
-            size = n;
+template <typename T>
+class CircularQueue {
+private:
+    T* array;
+    int size;
+    int front;
+    int rear;
+
+public:
+    CircularQueue(int n) {
+        array = new T[n];
+        size = n;
+        front = -1;
+        rear = -1;
+    }
+
+    ~CircularQueue() {
+        delete[] array;
+    }
+
+    bool isEmpty() {
+        return front == -1;
+    }
+
+    bool isFull() {
+        return (rear + 1) % size == front;
+    }
+
+    void enqueue(T data) {
+        if (isFull()) {
+            cout << "Queue overflow" << endl;
+            return;
         }
-        void enqueue(T data) {
-            if (rear == size-1) {
-                cout << "array overflow" << endl;
-            }
-            else if (!isEmpty()) {
-                rear += 1;
-                array[rear] = data;
-            }
-            else {
-                front = 0;
-                rear = 0;
-                array[rear] = data;
-            }
+
+        if (isEmpty()) {
+            front = rear = 0;
+        } else {
+            rear = (rear + 1) % size;
         }
-        T dequeue() {
-            if (!isEmpty()) {
-                if (rear == front) {
-                    rear = front = -1;
-                    return array[0]; 
-                }
-                else {
-                    for (int i = 0; i < rear; i++) {
-                        array[i] = array[i+1];
-                    }
-                    rear -= 1;
-                    return array[0];    
-                }
-            }
-            else {
-                cout << "this operation is not supported with empty queue." << endl;
-                return NULL;
-            }
+
+        array[rear] = data;
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "Queue underflow" << endl;
+            return;
         }
-        bool isEmpty() {
-            if (rear == -1) {
-                return true;
-            }
-            return false;
+
+        if (front == rear) { // Single element in the queue
+            front = rear = -1;
+        } else {
+            front = (front + 1) % size; // Move front circularly
         }
+    }
+
+    void print() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        int i = front;
+        while (true) {
+            cout << array[i] << " ";
+            if (i == rear) break;
+            i = (i + 1) % size; // Circular increment
+        }
+        cout << endl;
+    }
+
+    void peek() {
+        if (!isEmpty()) {
+            cout << array[front] << endl;
+        } else {
+            cout << "Queue is empty" << endl;
+        }
+    }
 };
 
 #endif
