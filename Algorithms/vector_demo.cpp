@@ -1,5 +1,7 @@
 #include <iostream>
 #include<vector>
+#include <utility>
+#include <cmath>
 using namespace std;
 
 int main() {
@@ -23,4 +25,10 @@ int main() {
     // 2-D Vectors
     vector<vector<int>> matrix;                         // initialization
     vector<vector<int>> matrix2(3, vector<int>(4,0));   // initialization with fixed size and number
+
+    auto var = make_pair("hello", 123);                 // making auto variable
+    cout << var.first;                                  // accessing neted elements of auto
+
+
+    cout << pow(2, 90);                                 // power of a integer
 }

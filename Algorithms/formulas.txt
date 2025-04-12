@@ -1,0 +1,3 @@
+RABIN KARP STRING MATCHING
+    h = d^(m-1) % q
+    new_hash = (d*(pre_hash - removed_value * h)+ added_value)%q
