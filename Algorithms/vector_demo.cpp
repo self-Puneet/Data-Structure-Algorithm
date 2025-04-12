@@ -22,5 +22,5 @@ int main() {
 
     // 2-D Vectors
     vector<vector<int>> matrix;                         // initialization
-    vector<vector<int>> matrix2(3, vector<int>()4,0);   // initialization with fixed size and number
+    vector<vector<int>> matrix2(3, vector<int>(4,0));   // initialization with fixed size and number
 }
