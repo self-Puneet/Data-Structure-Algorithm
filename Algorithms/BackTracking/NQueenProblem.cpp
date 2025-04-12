@@ -1,0 +1,1 @@
+// You are given a chessboard of size N×N. Your task is to write a program that uses backtracking to place N queens the chessboard such that no two queens can attack each other. The program should find all possible solutions and print the board configurations for each solution.
